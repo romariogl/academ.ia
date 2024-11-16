@@ -36,26 +36,26 @@ class ElasticsearchClient:
         return dict(grouped_docs)
     
     def search_specific(self, index_name, query, filename):
-            # Passo 1: Recuperação de documentos do Elasticsearch
         search_body = {
             "query": {
                 "bool": {
-                    "filter": {
-                        "term": {
-                            "article_name": filename  # Nome do arquivo fornecido
+                    "must": [
+                        {
+                            "match": {
+                                "article_name": filename  # Nome do arquivo que você está procurando
+                            }
+                        },
+                        {
+                            "match": {
+                                "content": query  # O conteúdo da consulta
+                            }
                         }
-                    },
-                    "must": {
-                        "match": {
-                            "content": query  # Conteúdo da consulta
-                        }
-                    }
+                    ]
                 }
             },
-            "size": 1 
+            "size": 20
         }
-
-
+       
         grouped_docs = defaultdict(str)
 
         response = self.client.search(index=index_name, body=search_body)
