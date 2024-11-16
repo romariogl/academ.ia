@@ -24,3 +24,4 @@ yarn-debug.log*
 yarn-error.log*
 ~
 rag-frontend/node_modules
+*/__pycache__/
