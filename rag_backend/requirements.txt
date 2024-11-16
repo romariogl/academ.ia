@@ -1,0 +1,9 @@
+flask
+flask-cors
+elasticsearch
+openai
+python-dotenv
+langchain
+beautifulsoup4
+langchain-community
+google-generativeai
