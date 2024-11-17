@@ -11,7 +11,7 @@ class ElasticsearchClient:
             load_dotenv()
             cls._instance = super(ElasticsearchClient, cls).__new__(cls)
             api_key = os.environ.get('ELASTICSEARCH_API_KEY', 'Empty')
-            cls._instance.client = Elasticsearch(os.environ.get('ELASTICSEARCH_HOST', 'https://localhost:9200'), api_key=api_key, verify_certs=False)
+            cls._instance.client = Elasticsearch(os.environ.get('ELASTICSEARCH_HOST', 'https://localhost:9200'), api_key=api_key)
         return cls._instance
 
     def search(self, index_name, query):
