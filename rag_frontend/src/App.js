@@ -20,7 +20,7 @@ function ChatApp() {
       <ul>
         <li><strong>Exemplo 1:</strong> Quais são os artigos sobre Inteligência Artificial?</li>
         <li><strong>Exemplo 2:</strong> Quais artigos falam sobre medicina?</li>
-        <li><strong>Exemplo 3:</strong> Quais artigos falam sobre educação?.</li>
+        <li><strong>Exemplo 3:</strong> Quais artigos falam sobre educação?</li>
       </ul>
       <p>Ou te ajudar com perguntas específicas de algum artigo que encontrou:</p>
       <ul>
