@@ -10,6 +10,30 @@ function ChatApp() {
   const BACKEND_URL = "http://127.0.0.1:5000"; // URL do seu backend Flask
   const chatEndRef = useRef(null);
 
+  useEffect(() => {
+    // Mensagem de instruções iniciais
+    const initialMessage = {
+      sender: "bot",
+      text: `
+      <p><strong>Bem-vindo!</strong> Eu sou a <strong>Academ.ia</strong>. Atualmente sou um protótipo de agente capaz de responder principalmente sobre artigos de inteligência artificial do CAPES.</p>
+      <p>Posso te ajudar com perguntas gerais:</p>
+      <ul>
+        <li><strong>Exemplo 1:</strong> Quais são os artigos sobre Inteligência Artificial?</li>
+        <li><strong>Exemplo 2:</strong> Quais artigos falam sobre medicina?</li>
+        <li><strong>Exemplo 3:</strong> Quais artigos falam sobre educação?.</li>
+      </ul>
+      <p>Ou te ajudar com perguntas específicas de algum artigo que encontrou:</p>
+      <ul>
+        <li><strong>Exemplo 1:</strong> no artigo "Problemas bioéticos emergentes de la inteligencia artificial" quais as principais conclusões do autor?</li>
+      </ul>
+      <p>No momento ainda estamos em construção!</p>
+      <p>Sinta-se à vontade para começar!</p>      
+      `,
+    };
+    setMessages([initialMessage]);
+  }, []);
+  
+  
   const handleSend = async () => {
     if (input.trim()) {
       // Adiciona a mensagem do usuário
