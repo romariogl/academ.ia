@@ -78,7 +78,8 @@ def fetch_and_process_website_full(url, article_title):
     loader = WebBaseLoader(url)
     # 3. Dividir o conteúdo em chunks
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
-    chunks = text_splitter.split_documents([loader.load()[0].page_content])
+    print("loader", loader.load())
+    chunks = text_splitter.split_documents(loader.load())
     print(f"Dividiu os documentos em {len(chunks)} chunks.")
 
     # 4. Ingerir os chunks no Elasticsearch
@@ -90,19 +91,32 @@ def fetch_and_process_website_full(url, article_title):
 
     print(f"Todos os chunks foram ingeridos no índice.")
 
+def extract_website_urls():
+    capes_ia_search_url = "https://www.periodicos.capes.gov.br/index.php/acervo/buscador.html?q=intelig%C3%AAncia+artificial&source=&publishyear_min%5B%5D=1943&publishyear_max%5B%5D=2025&page="
+    # extract 600 article url
+    capes_ia_articles_urls = []
+    for i in range(10):
+        response = requests.get(capes_ia_search_url + str(i))
+        if response.status_code != 200:
+            raise ValueError(f"Erro ao acessar a URL: {url}")    
+        soup = BeautifulSoup(response.text, "html.parser")
+
+        # Localize o elemento <a> com a classe 'titulo-busca'
+        links = soup.find_all('a', class_='titulo-busca')
+
+        for link in links:
+            url = "https://www.periodicos.capes.gov.br" + link.get('href')
+            capes_ia_articles_urls.append(url)
+    
+
+    return capes_ia_articles_urls
+
+        
 # Executa o processamento e ingestão
 if __name__ == "__main__":
-    website_urls = ['https://www.periodicos.capes.gov.br/index.php/acervo/buscador.html?task=detalhes&source=&id=W3159296334',
-                    'https://www.periodicos.capes.gov.br/index.php/acervo/buscador.html?task=detalhes&source=&id=W4389737105',
-                    'https://www.periodicos.capes.gov.br/index.php/acervo/buscador.html?task=detalhes&source=&id=W2121790392',
-                    'https://www.periodicos.capes.gov.br/index.php/acervo/buscador.html?task=detalhes&source=&id=W4281643871',
-                    'https://www.periodicos.capes.gov.br/index.php/acervo/buscador.html?task=detalhes&source=&id=W1990859777',
-                    'https://www.periodicos.capes.gov.br/index.php/acervo/buscador.html?task=detalhes&source=&id=W2466199754',
-                    'https://www.periodicos.capes.gov.br/index.php/acervo/buscador.html?task=detalhes&source=&id=W3004465710',
-                    'https://www.periodicos.capes.gov.br/index.php/acervo/buscador.html?task=detalhes&source=&id=W4205441508',
-                    'https://www.periodicos.capes.gov.br/index.php/acervo/buscador.html?task=detalhes&source=&id=W2916515250',
-                    'https://www.periodicos.capes.gov.br/index.php/acervo/buscador.html?task=detalhes&source=&id=W2919890321',                    
-                    ]
     
-    for  url in website_urls:
+    website_urls = extract_website_urls()
+    print(website_urls)
+
+    for url in website_urls:
         fetch_and_process_website_summary(url)

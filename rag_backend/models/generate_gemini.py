@@ -63,6 +63,13 @@ class GeminiClient:
         
         context = "\n\n".join(f'"{article_name}": "{content}"' for article_name, content in retrieved_docs.items())
 
+        formato_output = """
+                        
+                        {"Nome do Documento 1": "Resposta encontrada 1", "Nome do Documento n": "Resposta encontrada n"} 
+                        
+                        """
+        
+        
         prompt = (
             "Você é um assistente especializado em pesquisas científicas, que responde perguntas feitas com base nos "
             "documentos de contexto. \n\n"
@@ -70,10 +77,10 @@ class GeminiClient:
             "da internet. Sempre indique o nome do documento que foi usado como contexto na resposta.\n\n"
             f"Documentos:\n{context}\n\n"
             f"Pergunta: {query}\n\n"
-            "Resposta: Construa sua resposta como um dicionário JSON conforme o exemplo abaixo \n"
-            "{'Nome do Documento 1': 'Resposta encontrada 1', 'Nome do Documento n': 'Resposta encontrada n'}"
-            "\n\nSeja conciso na sua resposta, tente ser sempre o mais direto, SIGA FIELMENTE O MODELO DE RESPOSTA, SE NÃO HAVERÁ CONSEQUÊNCIAS GRAVES"
+            f"Resposta: Construa sua resposta como um JSON conforme o exemplo abaixo, \n {formato_output} "
+            "\nSeja conciso na sua resposta, tente ser sempre o mais direto, use as aspas triplas para garantir que não quebrará o dicionário JSON, não traga o termo 'JSON' na resposta, apenas o dicionário"
         )
+        print(prompt)
         response = chat_session.send_message(prompt)
         print(response)
         return response.text.strip()
