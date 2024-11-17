@@ -3,6 +3,8 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from rag_backend.models.elastic_search import ElasticsearchClient
 from bs4 import BeautifulSoup
 import requests
+# from transformers import pipeline
+from langchain_community.document_loaders import WebBaseLoader
 
 # Configurações do Elasticsearch
 es = ElasticsearchClient()
@@ -49,7 +51,7 @@ def extract_article_title_text_and_fulldocurl(url):
    
 
 # Carrega os dados do website e processa os chunks
-def fetch_and_process_website(url):
+def fetch_and_process_website_summary(url):
     # 1. Extrair o título do artigo
     article_title, description, fulldoc_url = extract_article_title_text_and_fulldocurl(url)
     print(f"Título do artigo extraído: {article_title}")
@@ -64,7 +66,26 @@ def fetch_and_process_website(url):
     for i, chunk in enumerate(chunks):
         # Adicionar um sufixo para distinguir múltiplos chunks do mesmo artigo
         chunk_id = f"{article_title}_chunk_{i}"
-        index_chunk(index_name="documents", chunk=chunk.page_content, article_id=chunk_id, article_name=article_title, url=fulldoc_url),
+        index_chunk(index_name="summary_index", chunk=chunk.page_content, article_id=chunk_id, article_name=article_title, url=fulldoc_url),
+        print(f"Indexou chunk com ID: {chunk_id}")
+
+    
+    fetch_and_process_website_full(url=fulldoc_url, article_title=article_title)    
+
+
+# Carrega os dados do website e processa os chunks
+def fetch_and_process_website_full(url, article_title):
+    loader = WebBaseLoader(url)
+    # 3. Dividir o conteúdo em chunks
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
+    chunks = text_splitter.split_documents([loader.load()[0].page_content])
+    print(f"Dividiu os documentos em {len(chunks)} chunks.")
+
+    # 4. Ingerir os chunks no Elasticsearch
+    for i, chunk in enumerate(chunks):
+        # Adicionar um sufixo para distinguir múltiplos chunks do mesmo artigo
+        chunk_id = f"{article_title}_chunk_{i}"
+        index_chunk(index_name="full_document_index", chunk=chunk.page_content, article_id=chunk_id, article_name=article_title, url=url),
         print(f"Indexou chunk com ID: {chunk_id}")
 
     print(f"Todos os chunks foram ingeridos no índice.")
@@ -84,4 +105,4 @@ if __name__ == "__main__":
                     ]
     
     for  url in website_urls:
-        fetch_and_process_website(url)
+        fetch_and_process_website_summary(url)
