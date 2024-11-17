@@ -316,19 +316,33 @@ $( document ).ready(function() {
               
                 
 <div class="area-busca mb-5">
-
+    <!-- Busca simples -->
     <div class="position-relative">
-        <form action="https://www.periodicos.capes.gov.br/index.php/acervo/buscador.html" method="GET" id="busca" class="busca">
-            <div class="input-group-prepend">
-                <span class="input-text-busca"><strong>Olá.</strong></span>
-            </div>
-            <button type="submit" class="btn" id="btn-busca-primo" value="Submit"><i class="fas fa-search"></i></button>
-            <input name="q" type="search" id="input-busca-primo" class="form-control" placeholder="O que você está procurando?" required>
-        </form>
-
-        <a class="btn btn-outline-padrao py-2 float-left mb-5" href="http://localhost:3000/" target="_self"><i class="fas fa-robot mr-2"></i>Para uma melhor experiencia de busca, utilize a nossa <strong>IA</strong>!</a>  
+      <form action="" method="GET" id="busca" class="busca" data-gtm-form-interact-id="0">
+        <div class="search-default" style="">
+          <button type="submit" class="btn" id="btn-busca-primo" value="Submit"><i class="fas fa-search"></i></button>
+          <input name="q" type="search" id="input-busca-primo" class="form-control" placeholder="O que você está procurando?" minlength="4" required="" data-gtm-form-interact-field-id="0">    
+          </br>
+          <!-- <button type="button" class="btn" id="recordButton" data-toggle="tooltip" title="" data-original-title="Busca por voz"><i class="fas fa-microphone"></i></button> -->
+        </div>
+    </form>
         
-    </div>
+<!-- Busca avançada -->
+        <!-- <div></br><button type="button" class="btn btn-link ml-2 float-right" id="btn-busca-avancada">Busca Avançada</button></div> -->
+        <div class="area-busca mb-5">
+          <div class="position-relative">
+
+   <!-- IAs -->
+          <div class="text-center">
+            <a class="btn btn-outline-padrao py-2 mb-1" href="http://localhost:3000/" target="_self">
+              <i class="fas fa-robot mr-2"></i>
+              Para uma melhor experiência de busca, utilize a nossa <strong>IA</strong>!
+            </a>
+          </div>
+          <!-- <a class="btn btn-outline-padrao py-2 float-right mb-1" href="http://localhost:3000/" target="_self"><i class="fas fa-robot mr-2"></i>Para uma melhor experiencia de busca, utilize a nossa <strong>IA</strong>!</a>   -->
+          </div>
+        </div>
+     </div>
   
 </div>
               </div>
@@ -338,9 +352,7 @@ $( document ).ready(function() {
                 
 
 <div class="custom"  >
-	<p class="h3">Aqui você encontra conteúdo científico diversificado para deixar sua pesquisa ainda melhor.</p>
-<p>Desde livros, normas técnicas, patentes e estatísticas até vídeos e áudios reunidos em um só lugar.</p>
-<p><a class="btn btn-outline-padrao p-2" href="index.php/sobre/quem-somos.html" target="_self">Saiba mais</a></p></div>
+	</div>
 
               </div>
               <div class="col-lg-6 col-12 col-sm-12 mb-3">
@@ -367,50 +379,7 @@ $(function(){
 	}, 3500);
 });
 </script>
-<div class="row">
-	<div class="col-md-10"><h3 class="text-dark">Destaques</h3></div>
-	<div class="col-md-2">
-		<a class="carousel-control-prev float-left" href="#carousel" role="button" data-slide="prev">
-			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			<span class="sr-only">Anterior</span>
-		</a>
-		<a class="carousel-control-next float-right" href="#carousel" role="button" data-slide="next">
-			<span class="carousel-control-next-icon" aria-hidden="true"></span>
-			<span class="sr-only">Próximo</span>
-		</a>
-	</div>
-</div>
 
-<div id="carousel" class="carousel slide" data-ride="carousel">
-	<ol class="carousel-indicators">
-					<li data-target="#carousel" data-slide-to="0" class="active"></li>
-        			<li data-target="#carousel" data-slide-to="1" class=""></li>
-        			<li data-target="#carousel" data-slide-to="2" class=""></li>
-        			<li data-target="#carousel" data-slide-to="3" class=""></li>
-        			<li data-target="#carousel" data-slide-to="4" class=""></li>
-        			<li data-target="#carousel" data-slide-to="5" class=""></li>
-        	</ol>
-  	<div class="carousel-inner">
-  					<div class="carousel-item active" data-interval="10000">
-				<a class="bt-saiba-mais" href="index.php/treinamentos/calend%c3%a1rio.html" title="Em Pauta - Retratação de Artigo Científico - 22 de novembro"><img class="d-block w-100" src="images/banners/Em_Pauta_-_22_de_novembro.png" alt="Em Pauta - Retratação de Artigo Científico - 22 de novembro" /></a>
-			</div>
-        			<div class="carousel-item " data-interval="10000">
-				<a class="bt-saiba-mais" href="mailto:acessoperiodicos@capes.gov.br" title="Atualização Dados IES 2024"><img class="d-block w-100" src="images/banners/Atualizao_dados_IES_V2.png" alt="Atualização Dados IES 2024" /></a>
-			</div>
-        			<div class="carousel-item " data-interval="10000">
-				<a class="bt-saiba-mais" href="https://www-periodicos-capes-gov-br.ez1.periodicos.capes.gov.br/images/documents/TITULOS_ACS_PUBLICACAO.pdf" title="Títulos ACS Publicações"><img class="d-block w-100" src="images/banners/Acesso_Aberto_Publicaes.png" alt="Títulos ACS Publicações" /></a>
-			</div>
-        			<div class="carousel-item " data-interval="10000">
-				<a class="bt-saiba-mais" href="https://acsopenscience.org/customers/capes/" title="Dúvidas pagamentos APCs"><img class="d-block w-100" src="images/banners/Banner_Dvidas_APCs.jpg" alt="Dúvidas pagamentos APCs" /></a>
-			</div>
-        			<div class="carousel-item " data-interval="10000">
-				<a class="bt-saiba-mais" href="https://www-periodicos-capes-gov-br.ez1.periodicos.capes.gov.br/index.php/acessoaberto.html" title="Menu Acesso Aberto 2024"><img class="d-block w-100" src="images/banners/Banner_Menu_Acesso_Aberto.jpg" alt="Menu Acesso Aberto 2024" /></a>
-			</div>
-        			<div class="carousel-item " data-interval="10000">
-				<a class="bt-saiba-mais" href="https://www-periodicos-capes-gov-br.ez1.periodicos.capes.gov.br/images/documents/Acesso CAFe _guia.pdf" title="E-mail marketing - acesso remoto via CAFe"><img class="d-block w-100" src="images/banners/Acesso_remoto.png" alt="" /></a>
-			</div>
-        	</div>
-</div>
               </div>
             </div>
           </div>

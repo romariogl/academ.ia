@@ -564,10 +564,12 @@ hr{
     position: absolute;
     right: 0px;
     /* pointer-events: none; */
-    margin-top: 0px;
+    margin-top: 15px;
     padding: 0px 12px 0px 0px;
 
 }
+
+/* BOTÃO DA LUPA ESTÁ AQUI */
 #btn-busca-defaul{
     position: absolute;
     right: 0px;
@@ -585,6 +587,7 @@ hr{
 .inner-addon .fas {
     position: absolute;
     padding: 10px;
+    right: 0px
 }
 
 .inner-addon i {
@@ -620,7 +623,7 @@ hr{
 input[type=search] {
     background-color: #f3f3f3;
     border: none;
-    margin-bottom: 13px;
+    margin-bottom: 0px;
     box-shadow: 0 .2rem .3rem rgba(0,0,0,.15) !important;
 }
 
@@ -636,7 +639,7 @@ input[type=search] {
 }
 
 section{
-    /* margin-top: 50px; */
+    margin-top: 50px;
     margin-bottom: 50px;
 }
 
@@ -754,22 +757,21 @@ section{
     border: none;
     border-radius: 0px;
     color: #212529;
-    box-shadow: 0 .2rem .3rem rgba(0,0,0,.15) !important;
+    /* box-shadow: 0 .2rem .3rem rgba(0,0,0,.15) !important; */
     height: 3.5em;
     font-size: 1.2em;
-    padding-left: 100px;
+    /* padding-left: 100px; */
     padding-right: 85px;
 }
 .busca i{
     font-size: 2.3em;
-    padding: 17px !important;
+    padding: 0px !important;
 }
 
 .input-text-busca{
     position: absolute;
     padding: 10px;
     pointer-events: none;
-    padding: 18px;
     font-size: 22px;
     font-weight: bold;
 }
@@ -1214,7 +1216,7 @@ a.btn-link.active{
     height: 3.5em;
     font-weight: bold;
     font-size: 1.2em;
-    padding-left: 100px;
+    /* padding-left: 100px; */
     padding-right: 110px;
     border-bottom: solid var(--cor-padrao-1);
     background: #FFF;
@@ -1721,7 +1723,7 @@ header #drawerMenu .nav li:nth-child(2):before {
 }
 
 .box-buscar-assunto{
-    /* height: 960px; */
+    height: 960px;
 }
 
 td.active.selected.day, span.month.active, span.month.focused.active, span.year.active, span.year.active.focused {
