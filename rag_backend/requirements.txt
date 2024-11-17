@@ -10,3 +10,5 @@ google-generativeai
 pip-system-certs
 transformers
 torch
+sentence_transformers
+gunicorn
