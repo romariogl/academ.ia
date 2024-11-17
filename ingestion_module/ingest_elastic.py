@@ -3,19 +3,23 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from rag_backend.models.elastic_search import ElasticsearchClient
 from bs4 import BeautifulSoup
 import requests
-# from transformers import pipeline
 from langchain_community.document_loaders import WebBaseLoader
+from sentence_transformers import SentenceTransformer 
 
+
+model = SentenceTransformer('all-MiniLM-L6-v2')
 # Configurações do Elasticsearch
 es = ElasticsearchClient()
 
 # Função para indexar um chunk no Elasticsearch
 def index_chunk(index_name, chunk, article_name, article_id, url):
+    embedding = model.encode(chunk).tolist()
     body = {
         "article_name": article_name,
         "content": chunk,
         "article_fulldoc_url": url,
-        "article_id": article_id
+        "article_id": article_id,
+        "embedding": embedding
     }
     es.index(index_name=index_name, id=article_id, body=body)
 
@@ -93,9 +97,9 @@ def fetch_and_process_website_full(url, article_title):
 
 def extract_website_urls():
     capes_ia_search_url = "https://www.periodicos.capes.gov.br/index.php/acervo/buscador.html?q=intelig%C3%AAncia+artificial&source=&publishyear_min%5B%5D=1943&publishyear_max%5B%5D=2025&page="
-    # extract 600 article url
+    # extract 240 article url
     capes_ia_articles_urls = []
-    for i in range(10):
+    for i in range(4):
         response = requests.get(capes_ia_search_url + str(i))
         if response.status_code != 200:
             raise ValueError(f"Erro ao acessar a URL: {url}")    
